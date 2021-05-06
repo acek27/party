@@ -1,81 +1,17 @@
-# Ping CRM
+[![Inertia.js](https://raw.githubusercontent.com/inertiajs/inertia/master/.github/LOGO.png)](https://inertiajs.com/)
 
-A demo application to illustrate how Inertia.js works.
+Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers. Find full documentation at [inertiajs.com](https://inertiajs.com/).
 
-![](https://raw.githubusercontent.com/inertiajs/pingcrm/master/screenshot.png)
+## Contributing
 
-## Installation
+If you're interested in contributing to Inertia.js, please read our [contributing guide](https://github.com/inertiajs/inertia/blob/master/.github/CONTRIBUTING.md).
 
-Clone the repo locally:
+## Sponsors
 
-```sh
-git clone https://github.com/inertiajs/pingcrm.git pingcrm
-cd pingcrm
-```
+A huge thanks to all [our sponsors](https://inertiajs.com/sponsors) who help push Inertia.js development forward! In particular, we'd like to say a special thank you to our partners:
 
-Install PHP dependencies:
+<a href="https://www.aryeo.com/">
+  <img width="150" alt="Aryeo" src="https://user-images.githubusercontent.com/882133/116239642-e52afa80-a730-11eb-8f3e-c97384db363d.png">
+</a>
 
-```sh
-composer install
-```
-
-Install NPM dependencies:
-
-```sh
-npm ci
-```
-
-Build assets:
-
-```sh
-npm run dev
-```
-
-Setup configuration:
-
-```sh
-cp .env.example .env
-```
-
-Generate application key:
-
-```sh
-php artisan key:generate
-```
-
-Create an SQLite database. You can also use another database (MySQL, Postgres), simply update your configuration accordingly.
-
-```sh
-touch database/database.sqlite
-```
-
-Run database migrations:
-
-```sh
-php artisan migrate
-```
-
-Run database seeder:
-
-```sh
-php artisan db:seed
-```
-
-Run the dev server (the output will give the address):
-
-```sh
-php artisan serve
-```
-
-You're ready to go! Visit Ping CRM in your browser, and login with:
-
-- **Username:** johndoe@example.com
-- **Password:** secret
-
-## Running tests
-
-To run the Ping CRM tests, run:
-
-```
-phpunit
-```
+If you'd like to become a sponsor, please [see here](https://inertiajs.com/sponsors) for more information. 💜
