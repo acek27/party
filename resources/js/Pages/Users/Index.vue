@@ -4,10 +4,10 @@
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
+        <select v-model="form.role_id" class="mt-1 w-full form-select">
           <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
+          <option value="1">Admin</option>
+          <option value="2">Crue</option>
         </select>
         <label class="mt-4 block text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
@@ -89,7 +89,7 @@ export default {
     return {
       form: {
         search: this.filters.search,
-        role: this.filters.role,
+        role_id: this.filters.role_id,
         trashed: this.filters.trashed,
       },
     }
