@@ -19,8 +19,9 @@ class UsersController extends Controller
             'users' => Auth::user()
                 ->orderByName()
                 ->filter(Request::only('search', 'role_id', 'trashed'))
-                ->get()
-                ->transform(function ($user) {
+                ->paginate()
+                ->withQueryString()
+                ->through(function ($user) {
                     return [
                         'id' => $user->id,
                         'name' => $user->name,
@@ -81,6 +82,10 @@ class UsersController extends Controller
 
     public function update(User $user)
     {
+        if (App::environment('local') && $user->isMainUser()) {
+            return Redirect::back()->with('error', 'Updating the Main user is not allowed.');
+        }
+
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -105,6 +110,9 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+        if (App::environment('local') && $user->isMainUser()) {
+            return Redirect::back()->with('error', 'Updating the Main user is not allowed.');
+        }
         $user->delete();
 
         return Redirect::back()->with('success', 'User deleted.');

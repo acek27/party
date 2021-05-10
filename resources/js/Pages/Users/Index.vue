@@ -29,7 +29,7 @@
           <th class="px-6 pt-6 pb-4">Email</th>
           <th class="px-6 pt-6 pb-4" colspan="2">Role</th>
         </tr>
-        <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="user in users.data" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('users.edit', user.id)">
               <img v-if="user.photo" class="block w-5 h-5 rounded-full mr-2 -my-2" :src="user.photo" />
@@ -49,7 +49,7 @@
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              {{ user.role_id == 1? 'Admin' : 'Crue' }}
+              {{ user.role_id === 1? 'Admin' : 'Crue' }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
@@ -63,6 +63,7 @@
         </tr>
       </table>
     </div>
+    <pagination class="mt-6 float-right" :links="users.links" />
   </div>
 </template>
 
@@ -72,6 +73,7 @@ import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
+import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
@@ -79,10 +81,11 @@ export default {
   components: {
     Icon,
     SearchFilter,
+    Pagination,
   },
   layout: Layout,
   props: {
-    users: Array,
+    users: Object,
     filters: Object,
   },
   data() {

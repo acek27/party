@@ -34,6 +34,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
     }
 
+    public function isMainUser()
+    {
+        return $this->email === 'acek@gmail.com';
+    }
 
     public function scopeOrderByName($query)
     {
