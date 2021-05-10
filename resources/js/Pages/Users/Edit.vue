@@ -18,9 +18,9 @@
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
           <text-input v-model="form.password" :error="form.errors.password" class="pr-6 pb-8 w-full lg:w-1/2" type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.owner" :error="form.errors.owner" class="pr-6 pb-8 w-full lg:w-1/2" label="Owner">
-            <option :value="true">Yes</option>
-            <option :value="false">No</option>
+          <select-input v-model="form.role_id" :error="form.errors.role_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Role">
+            <option :value="1">Admin</option>
+            <option :value="2">Crue</option>
           </select-input>
           <file-input v-model="form.photo" :error="form.errors.photo" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
         </div>
@@ -67,7 +67,7 @@ export default {
         last_name: this.user.last_name,
         email: this.user.email,
         password: null,
-        owner: this.user.owner,
+        role_id: this.user.role_id,
         photo: null,
       }),
     }
