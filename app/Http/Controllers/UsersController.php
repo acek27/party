@@ -49,7 +49,7 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
-        Auth::user()->account->users()->create([
+        Auth::user()->create([
             'first_name' => Request::get('first_name'),
             'last_name' => Request::get('last_name'),
             'email' => Request::get('email'),
