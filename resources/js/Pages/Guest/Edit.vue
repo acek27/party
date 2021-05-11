@@ -25,7 +25,7 @@
           </select-input>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-          <button v-if="!guest.deleted_at" class="text-red-600 hover:underline mr-auto" tabindex="-1" type="button" @click="destroy">Delete User</button>
+          <button v-if="!guest.deleted_at" class="text-red-600 hover:underline mr-auto" tabindex="-1" type="button" @click="destroy">Hapus Tamu</button>
           <inertia-link class="btn-indigo mr-3" :href="route('guest.index')">
             Kembali
           </inertia-link>

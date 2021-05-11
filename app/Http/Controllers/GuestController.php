@@ -84,8 +84,9 @@ class GuestController extends Controller
         return Redirect::back()->with('success', 'Contact deleted.');
     }
 
-    public function restore(Guest $guest)
+    public function restore($guest)
     {
+        $guest = Guest::withTrashed()->find($guest);
         $guest->restore();
 
         return Redirect::back()->with('success', 'Guest restored.');
