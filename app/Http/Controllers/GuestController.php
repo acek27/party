@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class GuestController extends Controller
@@ -26,7 +26,7 @@ class GuestController extends Controller
                         'rice' => $guest->rice,
                         'sugar' => $guest->sugar,
                         'other' => $guest->other,
-                        'detail' => $guest->detail_id,
+                        'detail_id' => $guest->detail_id,
                         'user' => $guest->user_id,
                         'deleted_at' => $guest->deleted_at,
                     ];
@@ -52,9 +52,9 @@ class GuestController extends Controller
         //
     }
 
-
-    public function edit(Guest $guest)
+    public function edit($guest)
     {
+        $guest = Guest::withTrashed()->find($guest);
         return Inertia::render('Guest/Edit', [
             'guest' => [
                 'id' => $guest->id,
@@ -64,7 +64,7 @@ class GuestController extends Controller
                 'rice' => $guest->rice,
                 'sugar' => $guest->sugar,
                 'other' => $guest->other,
-                'detail' => $guest->detail_id,
+                'detail_id' => $guest->detail_id,
                 'user' => $guest->user_id,
                 'deleted_at' => $guest->deleted_at,
             ],
@@ -77,14 +77,16 @@ class GuestController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Guest $guest)
     {
-        //
+        $guest->delete();
+
+        return Redirect::back()->with('success', 'Contact deleted.');
     }
 
-    public function restore(Guest $tamu)
+    public function restore(Guest $guest)
     {
-        $tamu->restore();
+        $guest->restore();
 
         return Redirect::back()->with('success', 'Guest restored.');
     }

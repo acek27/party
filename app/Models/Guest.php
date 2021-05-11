@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 
 class Guest extends Model
 {
-    use SoftDeletes, Authenticatable, Authorizable;
+    use SoftDeletes;
 
     protected $guarded = [];
+    protected $attributes = [
+        'money' => 0,
+        'rice' => 0,
+        'sugar' => 0,
+        'other' => null,
+    ];
 
     public function scopeFilter($query, array $filters)
     {

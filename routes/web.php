@@ -73,8 +73,7 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*'
 
 // Guest
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::resource('guest', GuestController::class);
-    Route::put('guest/{id}/restore', [GuestController::class, 'restore'])
+    Route::put('guest/{guest}/restore', [GuestController::class, 'restore'])
         ->name('guest.restore');
+    Route::resource('guest', GuestController::class);
 });

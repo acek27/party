@@ -66,14 +66,9 @@
             </td>
             <td class="border-t">
                 <inertia-link class="px-6 py-4 flex items-center" :href="route('guest.edit', tamu.id)" tabindex="-1">
-                    {{ tamu.detail == 1 ? 'Baru' :'Kembali' }}
+                    {{ tamu.detail_id == 1 ? 'Baru' :'Kembali' }}
                 </inertia-link>
             </td>
-<!--          <td class="border-t w-px">-->
-<!--            <inertia-link class="px-4 flex items-center" :href="route('guest.edit', tamu.id)" tabindex="-1">-->
-<!--              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />-->
-<!--            </inertia-link>-->
-          </td>
         </tr>
         <tr v-if="guest.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No users found.</td>

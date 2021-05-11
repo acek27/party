@@ -1,9 +1,9 @@
 <template>
   <div>
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
-    <select :id="id" ref="input" v-model="selected" v-bind="$attrs" autocomplete="off" class="form-select" :class="{ error: error }">
-      <slot />
-    </select>
+    <input :id="id" ref="input" v-bind="$attrs" class="form-input" autocomplete="off" :class="{ error: error }"
+           :type="type" :value="value" @input="$emit('input', $event.target.value)"
+    />
     <div v-if="error" class="form-error">{{ error }}</div>
   </div>
 </template>
@@ -15,22 +15,16 @@ export default {
     id: {
       type: String,
       default() {
-        return `select-input-${this._uid}`
+        return `number-input-${this._uid}`
       },
     },
-    value: [String, Number, Boolean],
+    type: {
+      type: String,
+      default: 'number',
+    },
+    value: Number,
     label: String,
     error: String,
-  },
-  data() {
-    return {
-      selected: this.value,
-    }
-  },
-  watch: {
-    selected(selected) {
-      this.$emit('input', selected)
-    },
   },
   methods: {
     focus() {
@@ -38,6 +32,9 @@ export default {
     },
     select() {
       this.$refs.input.select()
+    },
+    setSelectionRange(start, end) {
+      this.$refs.input.setSelectionRange(start, end)
     },
   },
 }
