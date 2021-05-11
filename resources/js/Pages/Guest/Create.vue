@@ -35,12 +35,12 @@ import TextInput from '@/Shared/TextInput'
 import TextareaInput from '@/Shared/TextareaInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
-import NumberInput from "../../Shared/NumberInput";
+import NumberInput from '../../Shared/NumberInput'
 
 export default {
   metaInfo: { title: 'Create User' },
   components: {
-      NumberInput,
+    NumberInput,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('guest  .store'))
+      this.form.post(this.route('guest.store'))
     },
   },
 }

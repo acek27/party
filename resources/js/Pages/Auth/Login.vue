@@ -6,7 +6,7 @@
         <div class="px-10 py-12">
           <h1 class="text-center font-bold text-3xl">Welcome Back!</h1>
           <div class="mx-auto mt-6 w-24 border-b-2" />
-          <text-input v-model="form.username" :error="form.errors.email" class="mt-10" label="Username" type="text" autofocus autocapitalize="off" />
+          <text-input v-model="form.username" :error="form.errors.username" class="mt-10" label="Username" type="text" autofocus autocapitalize="off" />
           <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Password" type="password" />
           <label class="mt-6 select-none flex items-center" for="remember">
             <input id="remember" v-model="form.remember" class="mr-1" type="checkbox" />

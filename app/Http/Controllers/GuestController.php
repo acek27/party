@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -41,9 +42,21 @@ class GuestController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store()
     {
-        //
+        Request::validate([
+            'name' => ['required', 'max:50'],
+            'address' => ['required', 'max:150'],
+            'money' => ['nullable', 'numeric'],
+            'rice' => ['nullable', 'numeric'],
+            'sugar' => ['nullable', 'numeric'],
+            'other' => ['nullable'],
+            'detail_id' => ['numeric', 'max:2'],
+        ]);
+        Request::merge(['user_id' => Auth::user()->id]);
+        Guest::create(Request::all());
+
+        return Redirect::route('guest.index')->with('success', 'Contact created.');
     }
 
 
@@ -54,7 +67,7 @@ class GuestController extends Controller
 
     public function edit($guest)
     {
-        $guest = Guest::withTrashed()->find($guest);
+        $guest = Guest::withTrashed()->findOrFail($guest);
         return Inertia::render('Guest/Edit', [
             'guest' => [
                 'id' => $guest->id,
@@ -86,7 +99,7 @@ class GuestController extends Controller
 
     public function restore($guest)
     {
-        $guest = Guest::withTrashed()->find($guest);
+        $guest = Guest::withTrashed()->findOrFail($guest);
         $guest->restore();
 
         return Redirect::back()->with('success', 'Guest restored.');

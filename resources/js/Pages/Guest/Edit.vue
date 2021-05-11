@@ -29,7 +29,7 @@
           <inertia-link class="btn-indigo mr-3" :href="route('guest.index')">
             Kembali
           </inertia-link>
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Update User</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Update Tamu</loading-button>
         </div>
       </form>
     </div>

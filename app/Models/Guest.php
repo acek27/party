@@ -40,6 +40,16 @@ class Guest extends Model
         return 'Rp ' . number_format($this->money, 0, ',', '.');
     }
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords($value);
+    }
+
+    public function setAddressAttribute($value)
+    {
+        $this->attributes['address'] = ucfirst($value);
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class);
