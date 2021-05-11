@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Guest;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -11,20 +12,23 @@ class GuestController extends Controller
 
     public function index()
     {
-        return Inertia::render('Users/Index', [
-            'filters' => Request::all('search', 'role', 'trashed'),
-            'users' => Auth::user()
-                ->orderByName()
-                ->filter(Request::only('search', 'role', 'trashed'))
-                ->get()
-                ->transform(function ($user) {
+        return Inertia::render('Guest/Index', [
+            'filters' => Request::all('search', 'detail', 'trashed'),
+            'guest' => Guest::filter(Request::only('search', 'detail', 'trashed'))
+                ->paginate()
+                ->withQueryString()
+                ->through(function ($guest) {
                     return [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'owner' => $user->owner,
-                        'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
-                        'deleted_at' => $user->deleted_at,
+                        'id' => $guest->id,
+                        'name' => $guest->name,
+                        'address' => $guest->address,
+                        'currency' => $guest->currency,
+                        'rice' => $guest->rice,
+                        'sugar' => $guest->sugar,
+                        'other' => $guest->other,
+                        'detail' => $guest->detail_id,
+                        'user' => $guest->user_id,
+                        'deleted_at' => $guest->deleted_at,
                     ];
                 }),
         ]);
@@ -94,5 +98,12 @@ class GuestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function restore(Guest $tamu)
+    {
+        $tamu->restore();
+
+        return Redirect::back()->with('success', 'Guest restored.');
     }
 }
