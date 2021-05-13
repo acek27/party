@@ -84,9 +84,21 @@ class GuestController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Guest $guest)
     {
-        //
+        Request::validate([
+            'name' => ['required', 'max:50'],
+            'address' => ['required', 'max:150'],
+            'money' => ['nullable', 'numeric'],
+            'rice' => ['nullable', 'numeric'],
+            'sugar' => ['nullable', 'numeric'],
+            'other' => ['nullable'],
+            'detail_id' => ['numeric', 'max:2'],
+        ]);
+
+        $guest->update(Request::only('name', 'address', 'money', 'rice', 'sugar', 'other', 'detail_id'));
+
+        return Redirect::back()->with('success', 'User updated.');
     }
 
 

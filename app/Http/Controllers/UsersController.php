@@ -95,7 +95,7 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name', 'email', 'role_id'));
+        $user->update(Request::only(['first_name', 'last_name', 'email', 'role_id']));
 
         if (Request::file('photo')) {
             $user->update(['photo_path' => Request::file('photo')->store('users')]);
